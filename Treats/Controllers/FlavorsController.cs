@@ -20,7 +20,7 @@ namespace Treats.Controllers
     public ActionResult Index()
     {
       ViewBag.Title = "Flavors";
-      List<Flavor> flavors = _db.Flavors.ToList();
+      List<Flavor> flavors = _db.Flavors.OrderBy(entry => entry.Description).ToList();
       return View(flavors);
     }
 
@@ -105,12 +105,19 @@ namespace Treats.Controllers
     }
 
     [HttpPost]
-    public ActionResult DeleteTreat(int id)
+    public ActionResult DeleteTreat(int id, int routeId)
     {
       FlavorTreat thisFlavorTreat = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == id);
       _db.FlavorTreats.Remove(thisFlavorTreat);
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = thisFlavorTreat.FlavorId });
+      if (routeId == 0)
+      {
+        return RedirectToAction("Details", new { id = thisFlavorTreat.FlavorId });
+      }
+      else 
+      {
+        return RedirectToAction("Details", "Treats", new { id = thisFlavorTreat.TreatId });
+      }
     }
   }
 }
