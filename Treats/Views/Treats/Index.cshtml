@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+@using Treats.Models
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Treats</h1>
+
+@if (Model.Count == 0)
+{
+  <p class="text-2xl">You have no treats.</p>
+}
+else
+{
+  <table class="mx-auto shadow-inner text-center capitalize text-lg w-1/2">
+    <thead>
+      <tr>
+        <th class="py-2 font-light">Treat Name</th>
+        <th class="font-light">Manage</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (Treat treat in Model)
+      {
+        <tr class="odd:bg-slate-50 hover:font-semibold">
+          <td class="py-2">@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</td>
+          <td>
+            @using (Html.BeginForm("Delete", "Treats", routeValues: new { id = treat.TreatId }))
+            {
+              <input type="submit" value="Delete" class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white">
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+<p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Treat", "Create")</p>

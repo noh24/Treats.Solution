@@ -17,7 +17,7 @@ else
     <thead>
       <tr>
         <th class="py-2 font-light">Treat Name</th>
-        <th class="font-light">Delete Treat</th>
+        <th class="font-light">Remove Treat</th>
       </tr>
     </thead>
 
@@ -25,9 +25,9 @@ else
     {
 
       <tr class="odd:bg-slate-50 hover:font-semibold">
-        <td class="py-2">@flavorTreat.Treat.Name</td>
+        <td class="py-2">@Html.ActionLink($"{flavorTreat.Treat.Name}", "Details", "Treats", new { id = flavorTreat.Treat.TreatId })</td>
         <td>
-          @using (Html.BeginForm("DeleteFlavor", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId }))
+          @using (Html.BeginForm("DeleteTreat", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId, routeId = 0 }))
           {
             <input type="submit" value="Remove Treat"
         class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">
