@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+@using Factory.ViewModels
+@model LoginViewModel
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Sign in with your account</h1>
+
+@if(!ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:", new { @class="text-red-400 font-bold space-y-2"})
+}
+<div class="w-1/2 flex flex-col items-center shadow-inner">
+  @using (Html.BeginForm(FormMethod.Post, new { @class = "text-lg text-center flex flex-col py-5" }))
+  {
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      @Html.LabelFor(m => m.Email, new {@class=" font-semibold"})
+      @Html.TextBoxFor(m => m.Email, new { @class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full"})
+    </div>
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      @Html.LabelFor(m => m.Password, new {@class=" font-semibold"})
+      @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full"}})
+    </div>
+    <div class="py-3">
+      <input type="submit" value="Sign in" class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer" />
+    </div>
+  }
+</div>

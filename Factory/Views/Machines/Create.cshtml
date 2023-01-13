@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Machine
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Add Machine</h1>
+<div class="w-1/2 flex flex-col items-center shadow-inner">
+  @using (Html.BeginForm(FormMethod.Post, new { @class = "text-lg text-center flex flex-col py-5" }))
+  {
+    <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-red-500 font-bold"})</p>
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      @Html.LabelFor(model => model.Name, new {@class=" font-semibold"})
+      @Html.TextBoxFor(model => model.Name, new { @class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full"})
+    </div>
+
+    <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-red-500 font-bold"})</p>
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      @Html.LabelFor(model => model.Description, new {@class=" font-semibold"})
+      @Html.TextBoxFor(model => model.Description, new { @class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full"})
+    </div>
+
+    <p>@Html.ValidationMessageFor(model => model.InstallmentDate, "", new { @class="text-red-500 font-bold"})</p>
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      @Html.Label("Installment Date", null, new {@class=" font-semibold"})
+      @Html.TextBoxFor(model => model.InstallmentDate, new { type="date" , @class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full"})
+    </div>
+
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      @Html.LabelFor(model => model.Location, new {@class=" font-semibold"})
+      @Html.DropDownList("LocationId", null, new { @class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full"})
+    </div>
+    <div class="py-3">
+      <input type="submit" value="Add" class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer"/>
+    </div>
+  }
+</div>
+<p class="text-red-500 font-semibold"><strong class="text-black">NOTE:</strong> You need to have at least one location before you can add a machine!</p>
+<p>Go to <span class="text-blue-400 font-bold hover:text-blue-700">@Html.ActionLink("this page", "Create", "Locations")</span> to create a location.</p>

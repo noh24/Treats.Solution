@@ -1,0 +1,36 @@
+@{
+  Layout="_Layout";
+}
+@using Factory.Models
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Locations</h1>
+
+@if (Model.Count == 0)
+{
+  <p class="text-2xl">There are no locations added.</p>
+}
+else
+{
+  <table class="mx-auto shadow-inner text-center text-lg w-1/2">
+    <thead>
+      <tr>
+        <th class="py-2 font-light">Location Name</th>
+        <th class="font-light">Manage</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach (Location location in Model)
+    {
+      <tr class="odd:bg-slate-50 hover:font-semibold">
+        <td class="py-2">@Html.ActionLink($"{location.Name}", "Details", new { id = location.LocationId })</td>
+        <td>
+          @using (Html.BeginForm("Delete", "Locations", routeValues: new {id = location.LocationId}))
+          {
+            <input type="submit" value="Delete" class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white">
+          }
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}
+<p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Location", "Create")</p>
