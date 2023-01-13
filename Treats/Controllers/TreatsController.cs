@@ -98,7 +98,8 @@ namespace Treats.Controllers
 #nullable disable
       if (flavorTreatEntity == null && flavorId != 0)
       {
-        _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = flavorId, TreatId = treat.TreatId });
+        Flavor thisFlavor = _db.Flavors.FirstOrDefault(entry => entry.FlavorId == flavorId);
+        _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = flavorId, TreatId = treat.TreatId, Name = $"{thisFlavor.Description} {treat.Name}" });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = treat.TreatId });
