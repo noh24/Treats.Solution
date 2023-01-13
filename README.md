@@ -1,13 +1,13 @@
-# Factory
+# Treats
 #### An application that tracks Engineers and Machines
 #### By [Brian Noh](https://github.com/noh24/) 
 
 ## Technologies Used
 * C#
-* .Net 6
+* .NET 6
 * ASP.Net Core 6 MVC
 * EF Core 6
-* SQL
+* ASP.Net Core Identity
 * MySQL
 * MySQL Workbench
 * LINQ
@@ -17,7 +17,7 @@
 
 ## Description
 This application allows the users to add and track their engineers and machines.
-![Screenshot ](./Factory/wwwroot/assets/images/splash-page-screenshot.png)
+![Screenshot ](./Treats/wwwroot/assets/images/splash-page-screenshot.png)
 
 ## Setup/Installation Requirements
 - Clone this repository to your Desktop:
@@ -25,28 +25,28 @@ This application allows the users to add and track their engineers and machines.
   2. Once GIT is installed, clone this repository by typing following commands in your command line:
      ```
      ~ $ cd Desktop
-     ~/Desktop $ git clone https://github.com/noh24/Factory.Solution.git
-     ~/Desktop $ cd Factory.Solution
+     ~/Desktop $ git clone https://github.com/noh24/Treats.Solution.git
+     ~/Desktop $ cd Treats.Solution
      ```
 - Install the [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - Install Packages for EF Core and a tool to update databases:
   ```
-  ~/Desktop/Factory.Solution $ dotnet add package Microsoft.EntityFrameworkCore -v 6.0.0
-  ~/Desktop/Factory.Solution $ dotnet add package Pomelo.EntityFrameworkCore.MySql -v 6.0.0-alpha.2
-  ~/Desktop/Factory.Solution $ dotnet tool install --global dotnet-ef --version 6.0.0
+  ~/Desktop/Treats.Solution $ dotnet add package Microsoft.EntityFrameworkCore -v 6.0.0
+  ~/Desktop/Treats.Solution $ dotnet add package Pomelo.EntityFrameworkCore.MySql -v 6.0.0-alpha.2
+  ~/Desktop/Treats.Solution $ dotnet tool install --global dotnet-ef --version 6.0.0
   ```
 - Create .gitignore file:
   ```
-   ~/Desktop/Factory.Solution/ $ touch .gitignore
-   ~/Desktop/Factory.Solution/ $ echo "*/obj/
+   ~/Desktop/Treats.Solution/ $ touch .gitignore
+   ~/Desktop/Treats.Solution/ $ echo "*/obj/
    */bin/
    */appsettings.json" > .gitignore
   ```
 - Create appsettings.json file:
   ```
-   ~/Desktop/Factory.Solution $ cd Factory
-   ~/Desktop/Factory.Solution/Factory $ touch appsettings.json
-   ~/Desktop/Factory.Solution/Factory $ echo '{
+   ~/Desktop/Treats.Solution $ cd Treats
+   ~/Desktop/Treats.Solution/Treats $ touch appsettings.json
+   ~/Desktop/Treats.Solution/Treats $ echo '{
       "ConnectionStrings": {
         "DefaultConnection": "Server=localhost;Port=3306;database=brian_noh;uid=root;pwd=[PASSWORD];"
       }
@@ -55,19 +55,19 @@ This application allows the users to add and track their engineers and machines.
   [PASSWORD] is your password
 - Install dependencies:
   ```
-   ~/Desktop/Factory.Solution/ $ npm install
+   ~/Desktop/Treats.Solution/ $ npm install
   ```
 - Update Database:
   ```
-  ~/Desktop/Factory.Solution/ $ dotnet ef database update --project Factory
+  ~/Desktop/Treats.Solution/ $ dotnet ef database update --project Treats
   ```
 - Build the project:
   ```
-   ~/Desktop/Factory.Solution/ $ dotnet build Factory/
+   ~/Desktop/Treats.Solution/ $ dotnet build Treats/
   ```
 - Run the project
   ```
-   ~/Desktop/Factory.Solution/ $ dotnet run --project Factory/
+   ~/Desktop/Treats.Solution/ $ dotnet run --project Treats/
   ```
 - Visit [http://localhost:5000](http://localhost:5000) to try this application
 

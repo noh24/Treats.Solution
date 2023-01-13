@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Factory.Models;
+using Treats.Models;
 // Identity
 using Microsoft.AspNetCore.Identity;
 
-namespace Factory
+namespace Treats
 {
   class Program
   {
@@ -16,7 +16,7 @@ namespace Factory
       builder.Services.AddControllersWithViews();
 
       // add EF Core as a service to our To Do List app, specify ToDoListContext as the type
-      builder.Services.AddDbContext<FactoryContext>(
+      builder.Services.AddDbContext<TreatsContext>(
                         dbContextOptions => dbContextOptions
                           .UseMySql(
                             builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
@@ -24,8 +24,8 @@ namespace Factory
                         )
                       );
       // Identity
-      builder.Services.AddIdentity<FactoryManager, IdentityRole>()
-        .AddEntityFrameworkStores<FactoryContext>()
+      builder.Services.AddIdentity<TreatsManager, IdentityRole>()
+        .AddEntityFrameworkStores<TreatsContext>()
         .AddDefaultTokenProviders();
       // Password Customize
       builder.Services.Configure<IdentityOptions>(options =>

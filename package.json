@@ -1,23 +1,23 @@
 {
-  "name": "factory.solution",
+  "name": "treats.solution",
   "version": "1.0.0",
   "description": "* C#\r * .Net 6\r * ASP.Net Core 6 MVC\r * EF Core 6\r * SQL\r * MySQL\r * MySQL Workbench\r * LINQ\r * Razor\r * Tailwindcss\r * Html",
   "main": "index.js",
   "scripts": {
-    "tw-build": "tailwindcss -i ./Factory/wwwroot/css/input.css -o ./Factory/wwwroot/css/output.css",
-    "tw-watch": "tailwindcss -i ./Factory/wwwroot/css/input.css -o ./Factory/wwwroot/css/output.css --watch"
+    "tw-build": "tailwindcss -i ./Treats/wwwroot/css/input.css -o ./Treats/wwwroot/css/output.css",
+    "tw-watch": "tailwindcss -i ./Treats/wwwroot/css/input.css -o ./Treats/wwwroot/css/output.css --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noh24/Factory.Solution.git"
+    "url": "git+https://github.com/noh24/Treats.Solution.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/noh24/Factory.Solution/issues"
+    "url": "https://github.com/noh24/Treats.Solution/issues"
   },
-  "homepage": "https://github.com/noh24/Factory.Solution#readme",
+  "homepage": "https://github.com/noh24/Treats.Solution#readme",
   "devDependencies": {
     "tailwindcss": "^3.2.4"
   }
