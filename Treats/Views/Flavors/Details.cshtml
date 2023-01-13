@@ -1,0 +1,43 @@
+@{
+  Layout = "_Layout";
+}
+@model Treats.Models.Flavor
+@using Treats.Models
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Flavor <span
+    class="text-brightRed">@Model.Description</span></h1>
+
+<h4 class="text-2xl text-brightRed">Treats</h4>
+@if (@Model.FlavorTreats.Count == 0)
+{
+  <p class="text-lg text-darkGrayishBlue">This flavor has no treats.</p>
+}
+else
+{
+  <table class="mx-auto shadow-inner text-center text-lg w-full">
+    <thead>
+      <tr>
+        <th class="py-2 font-light">Treat Name</th>
+        <th class="font-light">Delete Treat</th>
+      </tr>
+    </thead>
+
+    @foreach (FlavorTreat flavorTreat in Model.FlavorTreats)
+    {
+
+      <tr class="odd:bg-slate-50 hover:font-semibold">
+        <td class="py-2">@flavorTreat.Treat.Name</td>
+        <td>
+          @using (Html.BeginForm("DeleteFlavor", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId }))
+          {
+            <input type="submit" value="Remove Treat"
+        class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">
+          }
+        </td>
+      </tr>
+    }
+  </table>
+}
+<div class="flex space-x-3">
+  <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Treat To Flavor", "AddTreat", new { id = @Model.FlavorId })</p>
+  <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Edit Flavor", "Edit", new { id = @Model.FlavorId})</p>
+</div>
