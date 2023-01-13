@@ -4,7 +4,7 @@
 @using Treats.Models
 <h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Pierre's Savory and Sweet Treats</h1>
 <h2 class="text-4xl">Flavors and Treats</h2>
-<div class="flex w-1/2 justify-between">
+<div class="flex w-1/2 space-x-12 justify-between">
   @if (@Model["flavors"].Length == 0)
   {
     <p class="text-2xl">No flavors added.</p>
@@ -17,7 +17,7 @@
       </tr>
       @foreach (Flavor flavor in Model["flavors"])
       {
-        <tr class="odd:bg-slate-50 hover:font-semibold">
+        <tr class="even:bg-slate-50 hover:font-semibold">
           <td class="py-2">@Html.ActionLink(@flavor.Description, "Details", "Flavors", new { id = flavor.FlavorId })</td>
         </tr>
       }
@@ -36,7 +36,7 @@
       </tr>
       @foreach (Treat treat in Model["treats"])
       {
-        <tr class="odd:bg-slate-50 hover:font-semibold">
+        <tr class="even:bg-slate-50 hover:font-semibold">
           <td class="py-2">@Html.ActionLink(@treat.Name, "Details", "Treats", new { id = treat.TreatId})</td>
         </tr>
       }
