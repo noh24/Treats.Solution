@@ -72,7 +72,7 @@ namespace Treats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    
+
     [HttpPost]
     public ActionResult Delete(int id)
     {
@@ -98,13 +98,14 @@ namespace Treats.Controllers
 #nullable disable
       if (flavorTreatEntity == null && flavorId != 0)
       {
+        Treat thisTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == treat.TreatId);
         Flavor thisFlavor = _db.Flavors.FirstOrDefault(entry => entry.FlavorId == flavorId);
-        _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = flavorId, TreatId = treat.TreatId, Name = $"{thisFlavor.Description} {treat.Name}" });
+        _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = flavorId, TreatId = treat.TreatId, Name = $"{thisFlavor.Description}" + " " + $"{thisTreat.Name}" });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = treat.TreatId });
     }
-    
+
     // [HttpPost]
     // public ActionResult DeleteFlavor(int id)
     // {

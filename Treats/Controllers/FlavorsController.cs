@@ -99,7 +99,8 @@ namespace Treats.Controllers
       if (flavorTreatEntity == null && treatId != 0)
       {
         Treat thisTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == treatId);
-        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = treatId, FlavorId = flavor.FlavorId, Name = $"{flavor.Description} {thisTreat.Name}" });
+        Flavor thisFlavor = _db.Flavors.FirstOrDefault(entry => entry.FlavorId == flavor.FlavorId);
+        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = treatId, FlavorId = flavor.FlavorId, Name = $"{thisFlavor.Description}" + " " + $"{thisTreat.Name}" });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = flavor.FlavorId });
