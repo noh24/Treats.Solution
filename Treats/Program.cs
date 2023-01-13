@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Treats.Models;
-// Identity
 using Microsoft.AspNetCore.Identity;
 
 namespace Treats
@@ -24,7 +23,7 @@ namespace Treats
                         )
                       );
       // Identity
-      builder.Services.AddIdentity<TreatsManager, IdentityRole>()
+      builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<TreatsContext>()
         .AddDefaultTokenProviders();
       // Password Customize
@@ -53,7 +52,6 @@ namespace Treats
 
       app.UseRouting();
 
-      // Identity
       app.UseAuthentication();
       app.UseAuthorization();
 
