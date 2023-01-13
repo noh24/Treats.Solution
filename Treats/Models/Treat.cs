@@ -7,6 +7,8 @@ namespace Treats.Models
   {
     [Required(ErrorMessage = "Enter a treat name.")]
     public string Name { get; set; }
+    public int TreatId { get; set; }
+
     public List<FlavorTreat> FlavorTreats { get; }
   }
 }
