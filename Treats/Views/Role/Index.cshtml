@@ -2,26 +2,25 @@
   Layout = "_Layout";
 }
 <h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Roles</h1>
-
-@* @if (Model.Length == 0)
-  {
-  <p class="text-2xl">You have no treats.</p>
-  }
-  else
-  { *@
 <table class="mx-auto shadow-inner text-center capitalize text-lg w-1/2">
     <tr>
       <th class="py-2 font-light">Role Name</th>
       <th class="font-light">Role Id</th>
-      <th class="font-light">User</th>
+      @* <th class="font-light">User</th> *@
       <th class="font-light">Actions</th>
     </tr>
-    @foreach (var role in Model)
+    @foreach (var role in Model.Roles)
     {
       <tr class="odd:bg-slate-50 hover:font-semibold">
         <td class="py-2">@role.Name</td>
         <td class="py-2">@role.Id</td>
-        <td i-role="@role.Id" class="py-2">
+        @* <td>
+          @foreach (var user in role)
+          {
+            <span>@user.UserName</span>
+          }
+        </td> *@
+        <td i-role="@role.Id" class="py-2"></td>
         <td class="flex items-center space-x-3">
             @Html.ActionLink("Update", "Edit", new { id = role.Id }, new { @class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white" })
             @using (Html.BeginForm("Delete", "Role", new { id = role.Id }))

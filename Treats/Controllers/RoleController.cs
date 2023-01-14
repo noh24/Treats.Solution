@@ -23,7 +23,7 @@ namespace Treats.Controllers
 
     public ViewResult Index()
     {
-      return View(_roleManager.Roles);
+      return View(_roleManager);
     }
     private void Errors(IdentityResult result)
     {
@@ -64,24 +64,22 @@ namespace Treats.Controllers
     public async Task<IActionResult> Edit(string id)
     {
       IdentityRole role = await _roleManager.FindByIdAsync(id);
-      IList<ApplicationUser> members = await _userManager.GetUsersInRoleAsync(role.Name);
-      IList<ApplicationUser> nonMembers = await _userManager.GetUsersInRoleAsync(role.Name);
-      // List<ApplicationUser> members = new List<ApplicationUser>();
-      // List<ApplicationUser> nonMembers = new List<ApplicationUser>();
-      // if (role != null)
-      // {
-        foreach (ApplicationUser user in _userManager.Users)
-        {
-          if (!await _userManager.IsInRoleAsync(user, role.Name))
-          {
-            nonMembers.Add(user);
-          }
-      //   }
-      }
-      RoleEdit newRoleEdit = new RoleEdit { Role = role, Members = members, NonMembers = nonMembers };
-      return View(newRoleEdit);
-    }
 
+      List<ApplicationUser> members = new List<ApplicationUser>();
+      List<ApplicationUser> nonMembers = new List<ApplicationUser>();
+
+      foreach (ApplicationUser user in _userManager.Users.ToList())
+      {
+        var list = await _userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+        list.Add(user);
+      }
+      return View(new RoleEdit
+      {
+        Role = role,
+        Members = members,
+        NonMembers = nonMembers
+      });
+    }
     [HttpPost]
     public async Task<IActionResult> Edit(RoleModification model)
     {
