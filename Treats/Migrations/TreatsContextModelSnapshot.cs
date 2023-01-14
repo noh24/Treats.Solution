@@ -231,7 +231,7 @@ namespace Registrar.Migrations
 
                     b.HasKey("FlavorId");
 
-                    b.ToTable("Flavors");
+                    b.ToTable("Flavors", (string)null);
                 });
 
             modelBuilder.Entity("Treats.Models.FlavorTreat", b =>
@@ -255,7 +255,7 @@ namespace Registrar.Migrations
 
                     b.HasIndex("TreatId");
 
-                    b.ToTable("FlavorTreats");
+                    b.ToTable("FlavorTreats", (string)null);
                 });
 
             modelBuilder.Entity("Treats.Models.Order", b =>
@@ -276,7 +276,7 @@ namespace Registrar.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Treats.Models.Treat", b =>
@@ -291,7 +291,7 @@ namespace Registrar.Migrations
 
                     b.HasKey("TreatId");
 
-                    b.ToTable("Treats");
+                    b.ToTable("Treats", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

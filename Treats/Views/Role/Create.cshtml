@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+@model string
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Add Role</h1>
+<div class="w-1/2 flex flex-col items-center shadow-inner">
+  @using (Html.BeginForm(FormMethod.Post, new { @class = "text-lg text-center flex flex-col py-5" }))
+  {
+    <div class="py-3 space-x-3 space-y-3 flex flex-col items-center">
+      <label for="name" class="font-semibold">Name</label>
+      <input name="name" class="py-1 text-sm rounded-xl text-center border shadow-inner outline-slate-200 text-slate-700 w-full">
+    </div>
+    <div class="py-3">
+      <input type="submit" value="Add" class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer"/>
+    </div>
+  }
+</div>

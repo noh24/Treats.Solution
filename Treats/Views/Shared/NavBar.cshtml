@@ -15,6 +15,7 @@
     @if (User.Identity.IsAuthenticated)
     {
       <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Account", "Index", "Account")</p>
+      <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Role", "Index", "Role")</p>
       @using (Html.BeginForm("LogOff", "Account"))
       {
         <input type="submit" value="Log out" class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">

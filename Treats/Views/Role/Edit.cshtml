@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+@model Treats.Models.RoleEdit
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Edit Order</h1>
+
+<div class="w-1/2 flex flex-col items-center shadow-inner">
+  @using (Html.BeginForm(FormMethod.Post, new { @class = "text-lg text-center flex flex-col py-5" }))
+  {
+    @Html.HiddenFor(model => model.Role.Name)
+    @Html.HiddenFor(model => model.Role.Id)
+    <table class="mx-auto shadow-inner text-center text-lg w-1/2">
+      <tr>
+        <th class="py-2 font-light">Role Name</th>
+        <th class="font-light">Role Id</th>
+        <th class="font-light">User</th>
+        <th class="font-light">Actions</th>
+      </tr>
+      @if (Model.NonMembers.Count() == 0)
+      {
+        <tr>
+          <td></td>
+        </tr>
+      }
+      @foreach (var user in Model.NonMembers)
+      {
+        <tr class="odd:bg-slate-50 hover:font-semibold">
+          <td class="py-2">@user.UserName</td>
+        </tr>
+      }
+    </table>
+    <div class="py-3">
+      <input type="submit" value="Update"
+      class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer" />
+    </div>
+  }
+</div>

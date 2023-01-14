@@ -24,6 +24,7 @@ namespace Treats
                       );
       // Identity
       builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        // .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<TreatsContext>()
         .AddDefaultTokenProviders();
       // Password Customize
