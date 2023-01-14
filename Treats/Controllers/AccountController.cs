@@ -12,11 +12,13 @@ namespace Treats.Controllers
     private readonly TreatsContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, TreatsContext db)
+    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, TreatsContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
+      _roleManager = roleManager;
       _db = db;
     }
     public async Task<ActionResult> Index()
@@ -34,9 +36,22 @@ namespace Treats.Controllers
       return View(currentUser);
     }
 
-    public IActionResult Register()
+    public async Task<IActionResult> Register()
     {
       ViewBag.Title = "Sign up";
+      bool adminExist = await _roleManager.RoleExistsAsync("Admin");
+      if (!adminExist)
+      {
+        IdentityRole role = new IdentityRole() { Name = "Admin" };
+        await _roleManager.CreateAsync(role);
+        ApplicationUser user = new ApplicationUser() { UserName = "admin@admin.com", Email = "admin@admin.com", FirstName = "admin", LastName = "admin"};
+        string password = "a";
+        IdentityResult userValid = await _userManager.CreateAsync(user, password);
+        if (userValid.Succeeded)
+        {
+          var result = await _userManager.AddToRoleAsync(user, "Admin");
+        }
+      }
       return View();
     }
 

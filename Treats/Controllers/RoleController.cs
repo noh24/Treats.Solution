@@ -1,21 +1,21 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Treats.Models;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Treats.Controllers
 {
+  [Authorize(Roles = "Manager, Admin")]
   public class RoleController : Controller
   {
     private RoleManager<IdentityRole> _roleManager;
     private UserManager<ApplicationUser> _userManager;
-    public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+    public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, TreatsContext db)
     {
       _roleManager = roleManager;
       _userManager = userManager;
@@ -23,7 +23,6 @@ namespace Treats.Controllers
 
     public ViewResult Index()
     {
-      ViewBag.Title = "Roles";
       return View(_roleManager);
     }
     private void Errors(IdentityResult result)
@@ -114,7 +113,6 @@ namespace Treats.Controllers
           }
         }
       }
-
       if (ModelState.IsValid)
         return RedirectToAction(nameof(Index));
       else
