@@ -7,10 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Treats.Controllers
 {
+  [Authorize]
   public class OrdersController : Controller
   {
     private readonly TreatsContext _db;

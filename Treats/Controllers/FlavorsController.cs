@@ -4,10 +4,11 @@ using Treats.Models;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Treats.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly TreatsContext _db;
@@ -16,14 +17,14 @@ namespace Treats.Controllers
     {
       _db = db;
     }
-
+    [AllowAnonymous]
     public ActionResult Index()
     {
       ViewBag.Title = "Flavors";
       List<Flavor> flavors = _db.Flavors.OrderBy(entry => entry.Description).ToList();
       return View(flavors);
     }
-
+    [Authorize(Roles = "Manager")]
     public ActionResult Create()
     {
       ViewBag.Title = "Create Flavors";
