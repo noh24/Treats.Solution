@@ -102,7 +102,7 @@ namespace Treats.Controllers
 
     public IActionResult AccessDenied()
     {
-      return View();
+      return RedirectToAction("Login");
     }
   }
 }
