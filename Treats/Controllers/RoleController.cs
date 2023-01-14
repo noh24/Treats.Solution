@@ -21,9 +21,16 @@ namespace Treats.Controllers
       _userManager = userManager;
     }
 
-    public ViewResult Index()
+    public async Task<ViewResult> Index()
     {
-      return View(_roleManager);
+      var roles = _roleManager.Roles;
+        var usersInRoles = new Dictionary<IdentityRole, IList<ApplicationUser>>();
+        foreach (var role in roles.ToList())
+        {
+            var users = await _userManager.GetUsersInRoleAsync(role.Name);
+            usersInRoles.Add(role, users);
+        }
+      return View(usersInRoles);
     }
     private void Errors(IdentityResult result)
     {
