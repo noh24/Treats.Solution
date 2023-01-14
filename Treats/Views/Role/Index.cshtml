@@ -15,7 +15,7 @@
         <td class="py-2">@Html.ActionLink($"{role.Key.Id}", "Edit", new { id = role.Key.Id })</td>
         <td class="py-2">@role.Key.Name</td>
         <td>
-          @foreach (ApplicationUser user in role.Value)
+          @foreach (var user in role.Value)
           {
             <span>@user.FirstName @user.LastName</span>
           }
