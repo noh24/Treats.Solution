@@ -1,0 +1,38 @@
+@{
+  Layout = "_Layout";
+}
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Roles</h1>
+<table class="mx-auto shadow-inner text-center capitalize text-lg w-1/2">
+    <tr>
+      <th class="py-2 font-light">Role Name</th>
+      <th class="font-light">Role Id</th>
+      @* <th class="font-light">User</th> *@
+      <th class="font-light text-center">Actions</th>
+    </tr>
+    @foreach (var role in Model.Roles)
+    {
+      <tr class="odd:bg-slate-50 hover:font-semibold">
+        <td class="py-2">@role.Name</td>
+        <td class="py-2">@role.Id</td>
+        @* <td>
+          @foreach (var user in role)
+          {
+            <span>@user.UserName</span>
+          }
+        </td> *@
+        @* <td i-role="@role.Id"></td> *@
+        <td class="flex items-center space-x-3">
+            @Html.ActionLink("Update", "Edit", new { id = role.Id }, new { @class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white" })
+            @using (Html.BeginForm("Delete", "Role", new { id = role.Id }))
+            {
+            <input type="submit" value="Delete"
+          class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white">
+            }
+        </td>
+      </tr>
+    }
+</table>
+@* } *@
+<p
+  class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">
+  @Html.ActionLink("Add Roles", "Create")</p>

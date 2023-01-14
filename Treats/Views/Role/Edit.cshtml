@@ -1,0 +1,64 @@
+@{
+  Layout = "_Layout";
+}
+@model Treats.Models.RoleEdit
+@using Treats.Models
+<h1 class="text-5xl font-bold border-b pb-4 text-darkGrayishBlue">Update @Model.Role.Name</h1>
+
+<div class="w-1/2 flex flex-col items-center shadow-inner">
+  @using (Html.BeginForm(FormMethod.Post, new { @class = "text-lg text-center flex flex-col py-5 space-y-12 w-full" }))
+  {
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+    <table class="mx-auto shadow-inner text-center text-lg w-1/2">
+      <tr>
+        <th class="py-2 font-light">Add to @Model.Role.Name</th>
+      </tr>
+      @if (Model.NonMembers.Count() == 0)
+      {
+        <tr>
+          <td class="py-2">All Users Are Members</td>
+        </tr>
+      }
+      else
+      {
+        @foreach (ApplicationUser user in Model.NonMembers)
+        {
+          <tr class="even:bg-slate-50 hover:font-semibold">
+            <td class="py-2">@user.UserName</td>
+            <td>
+              <input type="checkbox" name="AddIds" value="@user.Id">
+            </td>
+          </tr>
+        }
+      }
+    </table>
+    <table class="mx-auto shadow-inner text-center text-lg w-1/2">
+      <tr>
+        <th class="py-2 font-light">Remove from @Model.Role.Name</th>
+      </tr>
+      @if (Model.Members.Count() == 0)
+      {
+        <tr>
+          <td class="py-2">No users are members.</td>
+        </tr>
+      }
+      else
+      {
+        @foreach (ApplicationUser user in Model.Members)
+        {
+          <tr class="even:bg-slate-50 hover:font-semibold">
+            <td class="py-2">@user.UserName</td>
+            <td>
+              <input type="checkbox" name="DeleteIds" value="@user.Id">
+            </td>
+          </tr>
+        }
+      }
+    </table>
+    <div class="py-3">
+      <input type="submit" value="Update"
+      class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer" />
+    </div>
+  }
+</div>

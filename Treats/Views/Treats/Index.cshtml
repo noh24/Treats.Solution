@@ -14,7 +14,10 @@ else
     <thead>
       <tr>
         <th class="py-2 font-light">Treat Name</th>
+        @if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
+        {
         <th class="font-light">Manage</th>
+        }
       </tr>
     </thead>
     <tbody>
@@ -23,9 +26,12 @@ else
         <tr class="odd:bg-slate-50 hover:font-semibold">
           <td class="py-2">@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</td>
           <td>
-            @using (Html.BeginForm("Delete", "Treats", routeValues: new { id = treat.TreatId }))
+            @if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
             {
-              <input type="submit" value="Delete" class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white">
+              @using (Html.BeginForm("Delete", "Treats", routeValues: new { id = treat.TreatId }))
+              {
+                <input type="submit" value="Delete" class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white">
+              }
             }
           </td>
         </tr>
@@ -33,4 +39,7 @@ else
     </tbody>
   </table>
 }
+@if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
+{
 <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Treat", "Create")</p>
+}

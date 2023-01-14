@@ -6,7 +6,6 @@
     <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Home", "Index", "Home")</p>
     <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Flavors", "Index", "Flavors")</p>
     <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Treats", "Index", "Treats")</p>
-    <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Orders", "Index", "Orders")</p>
     @if (!User.Identity.IsAuthenticated)
     {
       <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Login", "Login", "Account")</p>
@@ -14,7 +13,12 @@
     }
     @if (User.Identity.IsAuthenticated)
     {
+      <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Orders", "Index", "Orders")</p>
       <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Account", "Index", "Account")</p>
+      @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+      {
+        <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Role", "Index", "Role")</p>
+      }
       @using (Html.BeginForm("LogOff", "Account"))
       {
         <input type="submit" value="Log out" class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">

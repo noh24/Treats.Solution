@@ -13,11 +13,14 @@
 }
 else
 {
-  <table class="mx-auto shadow-inner text-center text-lg w-full">
+  <table class="mx-auto shadow-inner text-center text-lg w-1/2">
     <thead>
       <tr>
         <th class="py-2 font-light">Treat Name</th>
-        <th class="font-light">Remove Treat</th>
+        @if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
+        {
+          <th class="font-light">Remove Treat</th>
+        }
       </tr>
     </thead>
 
@@ -27,17 +30,23 @@ else
       <tr class="odd:bg-slate-50 hover:font-semibold">
         <td class="py-2">@Html.ActionLink($"{flavorTreat.Treat.Name}", "Details", "Treats", new { id = flavorTreat.Treat.TreatId })</td>
         <td>
-          @using (Html.BeginForm("DeleteTreat", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId, routeId = 0 }))
+          @if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
           {
-            <input type="submit" value="Remove Treat"
-        class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">
+            @using (Html.BeginForm("DeleteTreat", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId, routeId = 0 }))
+            {
+              <input type="submit" value="Remove Treat"
+          class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">
+            }
           }
         </td>
       </tr>
     }
   </table>
 }
-<div class="flex space-x-3">
-  <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Treat To Flavor", "AddTreat", new { id = @Model.FlavorId })</p>
-  <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Edit Flavor", "Edit", new { id = @Model.FlavorId})</p>
-</div>
+@if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
+{
+  <div class="flex space-x-3">
+    <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Treat To Flavor", "AddTreat", new { id = @Model.FlavorId })</p>
+    <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Edit Flavor", "Edit", new { id = @Model.FlavorId})</p>
+  </div>
+}

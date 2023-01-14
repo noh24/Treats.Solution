@@ -13,11 +13,14 @@
 }
 else
 {
-  <table class="mx-auto shadow-inner text-center text-lg w-full">
+  <table class="mx-auto shadow-inner text-center text-lg w-1/2">
     <thead>
       <tr>
         <th class="py-2 font-light">Flavor</th>
+        @if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
+        {
         <th class="font-light">Remove Flavor</th>
+        }
       </tr>
     </thead>
 
@@ -27,17 +30,23 @@ else
       <tr class="odd:bg-slate-50 hover:font-semibold">
         <td class="py-2">@Html.ActionLink($"{flavorTreat.Flavor.Description}", "Details", "Flavors", new { id = flavorTreat.Flavor.FlavorId})</td>
         <td>
-          @using (Html.BeginForm("DeleteTreat", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId, routeId = 1 }))
+          @if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
           {
-            <input type="submit" value="Remove Flavor"
-        class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">
+            @using (Html.BeginForm("DeleteTreat", "Flavors", routeValues: new { id = flavorTreat.FlavorTreatId, routeId = 1 }))
+            {
+              <input type="submit" value="Remove Flavor"
+          class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none hover:cursor-pointer">
+            }
           }
         </td>
       </tr>
     }
   </table>
 }
+@if (User.IsInRole("Manager") || (User.IsInRole("Admin")))
+{
 <div class="flex space-x-3">
   <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Add Flavor To Treat", "AddFlavor", new { id = @Model.TreatId })</p>
   <p class="px-3 py-1 text-sm shadow-md text-white rounded-full bg-brightRedLight font-semibold hover:text-black hover:bg-brightRedSuperLight focus:outline-none">@Html.ActionLink("Edit Treat", "Edit", new { id = @Model.TreatId})</p>
 </div>
+}
