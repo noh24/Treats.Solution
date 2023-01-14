@@ -65,30 +65,19 @@ namespace Treats.Controllers
     {
       IdentityRole role = await _roleManager.FindByIdAsync(id);
       IList<ApplicationUser> members = await _userManager.GetUsersInRoleAsync(role.Name);
-      var usersInRoles = await UsersInAnyRole();
-
-      var allUserNames = await _userManager.Users.Select(user => user.UserName).ToList();
-
-      var usersNotInRole = allUserNames.Where(user => !usersInRoles.Any(userInRole => userInRole == user));
-  
-
-        List < ApplicationUser > nonMembers = await _userManager.GetUsersInRoleAsync(role.Name);
+      IList<ApplicationUser> nonMembers = await _userManager.GetUsersInRoleAsync(role.Name);
       // List<ApplicationUser> members = new List<ApplicationUser>();
       // List<ApplicationUser> nonMembers = new List<ApplicationUser>();
       // if (role != null)
       // {
-      //   foreach (ApplicationUser user in _userManager.Users)
-      //   {
-      //     if (await _userManager.IsInRoleAsync(user, role.Name))
-      //     {
-      //       members.Add(user);
-      //     }
-      //     else
-      //     {
-      //       nonMembers.Add(user);
-      //     }
+        foreach (ApplicationUser user in _userManager.Users)
+        {
+          if (!await _userManager.IsInRoleAsync(user, role.Name))
+          {
+            nonMembers.Add(user);
+          }
       //   }
-      // }
+      }
       RoleEdit newRoleEdit = new RoleEdit { Role = role, Members = members, NonMembers = nonMembers };
       return View(newRoleEdit);
     }
