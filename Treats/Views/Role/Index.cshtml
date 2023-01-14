@@ -20,7 +20,7 @@
             <span>@user.UserName</span>
           }
         </td> *@
-        @* <td i-role="@role.Id" class="py-2"></td> *@
+        @* <td i-role="@role.Id"></td> *@
         <td class="flex items-center space-x-3">
             @Html.ActionLink("Update", "Edit", new { id = role.Id }, new { @class="bg-brightRedSuperLight shadow-md px-2 py-1 text-sm rounded-full hover:cursor-pointer hover:bg-brightRedLight hover:text-white" })
             @using (Html.BeginForm("Delete", "Role", new { id = role.Id }))
