@@ -1,5 +1,5 @@
 # Treats
-#### An application that tracks Engineers and Machines
+#### An appilcation that allows users to manage flavors and treats.
 #### By [Brian Noh](https://github.com/noh24/) 
 
 ## Technologies Used
@@ -12,13 +12,20 @@
 * MySQL Workbench
 * LINQ
 * Razor
-* Tailwindcss
+* Tailwind CSS
 * Html
 
 ## Description
-This application allows the users to add and track their engineers and machines.
-![Screenshot ](./Treats/wwwroot/assets/images/splash-page-screenshot.png)
-
+This application allows the users view and manage flavored treats, sign up and login to their accounts.  
+Implemented role based authorizations to allow functions based on user's assigned role.  
+* Users have an option to login as admin  
+* Click on Register [Top Right Navbar]  
+* Login email address: admin@admin.com
+* Login password: a  
+<img width="400px" height="200px" src="./Treats/wwwroot/assets/images/cart.png">
+<img width="400px" height="200px" src="./Treats/wwwroot/assets/images/roles_splash.png">
+<img width="400px" height="200px" src="./Treats/wwwroot/assets/images/splash.png">
+<img width="400px" height="200px" src="./Treats/wwwroot/assets/images/update_roles.png">
 ## Setup/Installation Requirements
 - Clone this repository to your Desktop:
   1. Your computer will need to have GIT installed. If you do not currently have GIT installed, follow [these](https://docs.github.com/en/get-started/quickstart/set-up-git) directions for installing and setting up GIT.
