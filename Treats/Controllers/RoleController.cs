@@ -23,6 +23,7 @@ namespace Treats.Controllers
 
     public ViewResult Index()
     {
+      ViewBag.Title = "Roles";
       return View(_roleManager);
     }
     private void Errors(IdentityResult result)
@@ -30,7 +31,12 @@ namespace Treats.Controllers
       foreach (IdentityError error in result.Errors)
         ModelState.AddModelError("", error.Description);
     }
-    public IActionResult Create() => View();
+
+    public IActionResult Create()
+    {
+      ViewBag.Title = "Add Roles";
+      return View();
+    }
 
     [HttpPost]
     public async Task<ActionResult> Create([Required] string name)
@@ -63,6 +69,7 @@ namespace Treats.Controllers
     }
     public async Task<IActionResult> Edit(string id)
     {
+      ViewBag.Title = "Update Roles";
       IdentityRole role = await _roleManager.FindByIdAsync(id);
 
       List<ApplicationUser> members = new List<ApplicationUser>();
