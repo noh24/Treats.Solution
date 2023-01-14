@@ -24,7 +24,8 @@ namespace Treats.Controllers
       List<Flavor> flavors = _db.Flavors.OrderBy(entry => entry.Description).ToList();
       return View(flavors);
     }
-    [Authorize(Roles = "Manager")]
+
+    [Authorize(Roles = "Manager, Admin")]
     public ActionResult Create()
     {
       ViewBag.Title = "Create Flavors";
@@ -44,7 +45,7 @@ namespace Treats.Controllers
         return RedirectToAction("Index");
       }
     }
-
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Flavor thisFlavor = _db.Flavors
@@ -55,13 +56,13 @@ namespace Treats.Controllers
       return View(thisFlavor);
     }
 
+    [Authorize(Roles = "Manager, Admin")]
     public ActionResult Edit(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       ViewBag.Title = $"Edit {thisFlavor.Description}";
       return View(thisFlavor);
     }
-
     [HttpPost]
     public ActionResult Edit(Flavor flavor)
     {
@@ -73,7 +74,7 @@ namespace Treats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    
+
     [HttpPost]
     public ActionResult Delete(int id)
     {
@@ -83,6 +84,7 @@ namespace Treats.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "Manager, Admin")]
     public ActionResult AddTreat(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
@@ -117,7 +119,7 @@ namespace Treats.Controllers
       {
         return RedirectToAction("Details", new { id = thisFlavorTreat.FlavorId });
       }
-      else 
+      else
       {
         return RedirectToAction("Details", "Treats", new { id = thisFlavorTreat.TreatId });
       }
