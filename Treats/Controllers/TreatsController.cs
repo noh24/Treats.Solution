@@ -4,9 +4,11 @@ using Treats.Models;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Treats.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly TreatsContext _db;
@@ -16,7 +18,7 @@ namespace Treats.Controllers
       _db = db;
     }
 
-    // Routes
+    [AllowAnonymous]
     public ActionResult Index()
     {
       ViewBag.Title = "Treats";
@@ -24,12 +26,12 @@ namespace Treats.Controllers
       return View(model);
     }
 
+    [Authorize(Roles = "Manager, Admin")]
     public ActionResult Create()
     {
       ViewBag.Title = "Create Treats";
       return View();
     }
-
     [HttpPost]
     public ActionResult Create(Treat treat)
     {
@@ -44,6 +46,8 @@ namespace Treats.Controllers
         return RedirectToAction("Index");
       }
     }
+
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Treat thisTreat = _db.Treats
@@ -54,6 +58,7 @@ namespace Treats.Controllers
       return View(thisTreat);
     }
 
+    [Authorize(Roles = "Manager, Admin")]
     public ActionResult Edit(int id)
     {
       Treat thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -82,6 +87,7 @@ namespace Treats.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "Manager, Admin")]
     public ActionResult AddFlavor(int id)
     {
       Treat thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -89,7 +95,6 @@ namespace Treats.Controllers
       ViewBag.Title = $"Add Flavor to {thisTreat.Name}";
       return View(thisTreat);
     }
-
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int flavorId)
     {
@@ -105,14 +110,5 @@ namespace Treats.Controllers
       }
       return RedirectToAction("Details", new { id = treat.TreatId });
     }
-
-    // [HttpPost]
-    // public ActionResult DeleteFlavor(int id)
-    // {
-    //   FlavorTreat thisFlavorTreat = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == id);
-    //   _db.FlavorTreats.Remove(thisFlavorTreat);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Details", new { id = thisFlavorTreat.TreatId });
-    // }
   }
 }
