@@ -17,7 +17,14 @@
         <td>
           @foreach (var user in role.Value)
           {
-            <span>@user.FirstName @user.LastName</span>
+            @if(role.Value.Count > 1)
+            {
+              <span>@user.FirstName @user.LastName,</span>
+            }
+            else
+            {
+              <span>@user.FirstName @user.LastName</span>
+            }
           }
         </td>
         <td class="flex flex-col justify-center items-center space-x-3 md:flex-row">
