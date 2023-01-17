@@ -25,7 +25,7 @@
         @foreach (ApplicationUser user in Model.NonMembers)
         {
           <tr class="even:bg-slate-50 hover:font-semibold">
-            <td class="py-2">@user.UserName</td>
+            <td class="py-2">@user.FirstName @user.LastName</td>
             <td>
               <input type="checkbox" name="AddIds" value="@user.Id">
             </td>
@@ -48,7 +48,7 @@
         @foreach (ApplicationUser user in Model.Members)
         {
           <tr class="even:bg-slate-50 hover:font-semibold">
-            <td class="py-2">@user.UserName</td>
+            <td class="py-2">@user.FirstName @user.LastName</td>
             <td>
               <input type="checkbox" name="DeleteIds" value="@user.Id">
             </td>
